@@ -32,13 +32,18 @@ Base.metadata.create_all(engine)
 
 
 def ajouter_operation(nom, prenom,telphone, operation, prix,paye,date):
-    engine = create_engine('sqlite:///patients.db', echo=True)
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    operationN = Contact(nom=nom, prenom=prenom,telphone=telphone, operation=operation,prix=prix,paye=paye,date=date)
-    session.add(operationN)
-    session.commit()
-    print("operation ajouté avec succès.")
+    try:
+        engine = create_engine('sqlite:///patients.db', echo=True)
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        operationN = Contact(nom=nom, prenom=prenom,telphone=telphone, operation=operation,prix=prix,paye=paye,date=date)
+        session.add(operationN)
+        session.commit()
+        print("operation ajouté avec succès.")
+        return True
+    except:
+        return False
+    
 
 
 def modifier_operation(contact_id, nom, prenom,telphone, operation, prix,paye,date):
